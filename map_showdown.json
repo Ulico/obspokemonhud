@@ -458,7 +458,11 @@
             "standard": "pinsir.gif"
         },
         "128": {
-            "standard": "tauros.gif"
+            "standard": "tauros.gif",
+            "paldea": "128-p.gif",
+            "paldea blaze": "128-p-1.gif",
+            "paldea aqua": "128-p-2.gif"
+            
         },
         "129": {
             "female": "magikarp-f.gif",
@@ -680,7 +684,8 @@
         },
         "194": {
             "female": "wooper-f.gif",
-            "male": "wooper.gif"
+            "male": "wooper.gif",
+            "paldea": "194-p.gif"
         },
         "195": {
             "female": "quagsire-f.gif",
@@ -3184,6 +3189,354 @@
             "ice": "calyrex-ice.gif",
             "shadow": "calyrex-shadow.gif",
             "standard": "calyrex.gif"
+        },
+        "899": {
+            "standard": "wyrdeer.gif"
+        },
+        "900": {
+            "standard": "kleavor.gif"
+        },
+        "901": {
+            "standard": "ursaluna.gif",
+            "bloodmoon": "ursaluna-bloodmoon.gif"
+        },
+        "902": {
+            "standard": "basculegion.gif"
+        },
+        "903": {
+            "standard": "sneasler.gif"
+        },
+        "904": {
+            "standard": "overqwil.gif"
+        },
+        "905": {
+            "therian": "enamorus-therian.gif",
+            "incarnate": "enamorus.gif"
+        },
+        "906": {
+            "standard": "906.gif"
+        },
+        "907": {
+            "standard": "907.gif"
+        },
+        "908": {
+            "standard": "908.gif"
+        },
+        "909": {
+            "standard": "909.gif"
+        },
+        "910": {
+            "standard": "910.gif"
+        },
+        "911": {
+            "standard": "911.gif"
+        },
+        "912": {
+            "standard": "912.gif"
+        },
+        "913": {
+            "standard": "913.gif"
+        },
+        "914": {
+            "standard": "914.gif"
+        },
+        "915": {
+            "standard": "915.gif"
+        },
+        "916": {
+            "male": "916.gif",
+            "female": "916-f.gif"
+        },
+        "917": {
+            "standard": "917.gif"
+        },
+        "918": {
+            "standard": "918.gif"
+        },
+        "919": {
+            "standard": "919.gif"
+        },
+        "920": {
+            "standard": "920.gif"
+        },
+        "921": {
+            "standard": "921.gif"
+        },
+        "922": {
+            "standard": "922.gif"
+        },
+        "923": {
+            "standard": "923.gif"
+        },
+        "924": {
+            "standard": "924.gif"
+        },
+        "925": {
+            "family of four": "925.gif",
+            "family of three": "925-1.gif"
+        },
+        "926": {
+            "standard": "926.gif"
+        },
+        "927": {
+            "standard": "927.gif"
+        },
+        "928": {
+            "standard": "928.gif"
+        },
+        "929": {
+            "standard": "929.gif"
+        },
+        "930": {
+            "standard": "930.gif"
+        },
+        "931": {
+            "green": "931.gif",
+            "blue": "931-1.gif",
+            "yellow": "931-2.gif",
+            "white": "931-3.gif"
+        },
+        "932": {
+            "standard": "932.gif"
+        },
+        "933": {
+            "standard": "933.gif"
+        },
+        "934": {
+            "standard": "934.gif"
+        },
+        "935": {
+            "standard": "935.gif"
+        },
+        "936": {
+            "standard": "936.gif"
+        },
+        "937": {
+            "standard": "937.gif"
+        },
+        "938": {
+            "standard": "938.gif"
+        },
+        "939": {
+            "standard": "939.gif"
+        },
+        "940": {
+            "standard": "940.gif"
+        },
+        "941": {
+            "standard": "941.gif"
+        },
+        "942": {
+            "standard": "942.gif"
+        },
+        "943": {
+            "standard": "943.gif"
+        },
+        "944": {
+            "standard": "944.gif"
+        },
+        "945": {
+            "standard": "945.gif"
+        },
+        "946": {
+            "standard": "946.gif"
+        },
+        "947": {
+            "standard": "947.gif"
+        },
+        "948": {
+            "standard": "948.gif"
+        },
+        "949": {
+            "standard": "949.gif"
+        },
+        "950": {
+            "standard": "950.gif"
+        },
+        "951": {
+            "standard": "951.gif"
+        },
+        "952": {
+            "standard": "952.gif"
+        },
+        "953": {
+            "standard": "953.gif"
+        },
+        "954": {
+            "standard": "954.gif"
+        },
+        "955": {
+            "standard": "955.gif"
+        },
+        "956": {
+            "standard": "956.gif"
+        },
+        "957": {
+            "standard": "957.gif"
+        },
+        "958": {
+            "standard": "958.gif"
+        },
+        "959": {
+            "standard": "959.gif"
+        },
+        "960": {
+            "standard": "960.gif"
+        },
+        "961": {
+            "standard": "961.gif"
+        },
+        "962": {
+            "standard": "962.gif"
+        },
+        "963": {
+            "standard": "963.gif"
+        },
+        "964": {
+            "zero": "964.gif",
+            "hero": "964-1.gif"
+        },
+        "965": {
+            "standard": "965.gif"
+        },
+        "966": {
+            "standard": "966.gif"
+        },
+        "967": {
+            "standard": "967.gif"
+        },
+        "968": {
+            "standard": "968.gif"
+        },
+        "969": {
+            "standard": "969.gif"
+        },
+        "970": {
+            "standard": "970.gif"
+        },
+        "971": {
+            "standard": "971.gif"
+        },
+        "972": {
+            "standard": "972.gif"
+        },
+        "973": {
+            "standard": "973.gif"
+        },
+        "974": {
+            "standard": "974.gif"
+        },
+        "975": {
+            "standard": "975.gif"
+        },
+        "976": {
+            "standard": "976.gif"
+        },
+        "977": {
+            "standard": "977.gif"
+        },
+        "978": {
+            "curly": "978.gif",
+            "droopy": "978-1.gif",
+            "stretchy": "978-2.gif"
+        },
+        "979": {
+            "standard": "979.gif"
+        },
+        "980": {
+            "standard": "980.gif"
+        },
+        "981": {
+            "standard": "981.gif"
+        },
+        "982": {
+            "three segment": "982.gif",
+            "four segment": "982-1.gif"
+        },
+        "983": {
+            "standard": "983.gif"
+        },
+        "984": {
+            "standard": "984.gif"
+        },
+        "985": {
+            "standard": "985.gif"
+        },
+        "986": {
+            "standard": "986.gif"
+        },
+        "987": {
+            "standard": "987.gif"
+        },
+        "988": {
+            "standard": "988.gif"
+        },
+        "989": {
+            "standard": "989.gif"
+        },
+        "990": {
+            "standard": "990.gif"
+        },
+        "991": {
+            "standard": "991.gif"
+        },
+        "992": {
+            "standard": "992.gif"
+        },
+        "993": {
+            "standard": "993.gif"
+        },
+        "994": {
+            "standard": "994.gif"
+        },
+        "995": {
+            "standard": "995.gif"
+        },
+        "996": {
+            "standard": "996.gif"
+        },
+        "997": {
+            "standard": "997.gif"
+        },
+        "998": {
+            "standard": "998.gif"
+        },
+        "999": {
+            "chest": "999.gif",
+            "roaming": "999-1.gif"
+        },
+        "1000": {
+            "standard": "1000.gif"
+        },
+        "1001": {
+            "standard": "1001.gif"
+        },
+        "1002": {
+            "standard": "1002.gif"
+        },
+        "1003": {
+            "standard": "1003.gif"
+        },
+        "1004": {
+            "standard": "1004.gif"
+        },
+        "1005": {
+            "standard": "1005.gif"
+        },
+        "1006": {
+            "standard": "1006.gif"
+        },
+        "1007": {
+            "standard": "1007.gif"
+        },
+        "1008": {
+            "standard": "1008.gif"
+        },
+        "1009": {
+            "standard": "1009.gif"
+        },
+        "1010": {
+            "standard": "1010.gif"
         }
     }
 }
