@@ -317,12 +317,16 @@ def update_sprite_sources(source_name, team_slot):
             team_slot["dexnumber"],
             team_slot["variant"]
         )
-        location = cache_image(
-            sprite,
-            team_slot['shiny'],
-            sprite_map['cache_location'],
-            "sprites"
-        )
+        print(sprite)
+        if sprite.startswith("http"):
+            location = cache_image(
+                sprite,
+                team_slot['shiny'],
+                sprite_map['cache_location'],
+                "sprites"
+            )
+        else:
+            location = sprite
 
     source = obs.obs_get_source_by_name(source_name)
     if source is not None:
@@ -342,15 +346,36 @@ def get_sprite_location(urls, sprites, shiny, dex_number, variant):
         print("Function: Get Sprite sources")
 
     link = ""
-    if shiny:
-        link = urls['shiny']
+
+    use_local = False
+
+    if 'paldea' in variant or dex_number > 905:
+        use_local = True
     else:
-        link = urls['normal']
+        if shiny:
+            link = urls['shiny']
+        else:
+            link = urls['normal']
 
     if str(dex_number) not in sprites.keys():
         print("I don't belong")
         return
-    return link + sprites[str(dex_number)][variant]
+    
+    print(use_local)
+    
+    if use_local:
+        filename = sprites[str(dex_number)][variant]
+        if shiny:
+            parts = filename.split('.', 1)
+            if parts[0].isdigit():
+                filename = f"{parts[0]}s.{parts[1]}"
+            else:
+                leading_number = ''.join(c for c in parts[0] if c.isdigit())
+                filename = parts[0].replace(leading_number, f"{leading_number}s", 1) + f".{parts[1]}"
+            
+        return f"{script_path()}SV Sprites/" + filename
+    else:
+        return link + sprites[str(dex_number)][variant]
 
 
 
