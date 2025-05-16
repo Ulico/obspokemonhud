@@ -46,7 +46,7 @@ def script_description():
     It outputs the value for the description part of the "Scripts" window for
     this script.
     """
-    return "OBSPokemonHUD script for OBS.\nBy Tom."
+    return "OBSPokemonHUD script for OBS.\nBy Tom (edited by Ulico)."
 
 
 def script_properties():
@@ -75,12 +75,6 @@ def script_properties():
     # Add in a file path property for the team.json file
     obs.obs_properties_add_path(properties, "json_file", "Team JSON File", obs.OBS_PATH_FILE, "*.json", None)
 
-    # Add in a file path property for the items.json file
-    obs.obs_properties_add_path(properties, "items_json_file", "Items JSON File", obs.OBS_PATH_FILE, "*.json", None)
-
-    # Add width and height for item images
-    obs.obs_properties_add_int(properties, "item_height", "Item Height (pixels)", 1, 1000, 1)
-    obs.obs_properties_add_int(properties, "item_width", "Item Width (pixels)", 1, 1000, 1)
 
     # Team image locations.
     # Set up the settings and add in a blank value as the first value
@@ -137,6 +131,14 @@ def script_properties():
         obs.OBS_COMBO_FORMAT_STRING
     )
     obs.obs_property_list_add_string(slot6_sprite_image_source, "", "")
+
+        # Add in a file path property for the items.json file
+    obs.obs_properties_add_path(properties, "items_json_file", "Items JSON File", obs.OBS_PATH_FILE, "*.json", None)
+
+    # Add width and height for item images
+    obs.obs_properties_add_int(properties, "item_height", "Item Height (pixels)", 1, 1000, 1)
+    obs.obs_properties_add_int(properties, "item_width", "Item Width (pixels)", 1, 1000, 1)
+
 
     # Add 6 item image sources
     item_sources = []
