@@ -31,6 +31,12 @@ sprite_types = []
 # Dictionary for the team sprite image sources
 team_sprite_image_sources = []
 
+# Dictionary for the item image sources
+item_image_sources = []
+
+# The location for the items JSON file
+items_json_file = ""
+
 
 def script_description():
     """Sets up the description
@@ -69,6 +75,12 @@ def script_properties():
     # Add in a file path property for the team.json file
     obs.obs_properties_add_path(properties, "json_file", "Team JSON File", obs.OBS_PATH_FILE, "*.json", None)
 
+    # Add in a file path property for the items.json file
+    obs.obs_properties_add_path(properties, "items_json_file", "Items JSON File", obs.OBS_PATH_FILE, "*.json", None)
+
+    # Add width and height for item images
+    obs.obs_properties_add_int(properties, "item_height", "Item Height (pixels)", 1, 1000, 1)
+    obs.obs_properties_add_int(properties, "item_width", "Item Width (pixels)", 1, 1000, 1)
 
     # Team image locations.
     # Set up the settings and add in a blank value as the first value
@@ -126,8 +138,21 @@ def script_properties():
     )
     obs.obs_property_list_add_string(slot6_sprite_image_source, "", "")
 
+    # Add 6 item image sources
+    item_sources = []
+    for i in range(1, 7):
+        src = obs.obs_properties_add_list(
+            properties,
+            f"item{i}_image_source",
+            f"Item {i} Image Source",
+            obs.OBS_COMBO_TYPE_LIST,
+            obs.OBS_COMBO_FORMAT_STRING
+        )
+        obs.obs_property_list_add_string(src, "", "")
+        item_sources.append(src)
+
     # Iterate through each source in OBS, grabbing and adding the image ones in
-    # to the list for each of the team member sources
+    # to the list for each of the team member sources and item sources
     sources = obs.obs_enum_sources()
     if sources is not None:
         for source in sources:
@@ -140,6 +165,8 @@ def script_properties():
                 obs.obs_property_list_add_string(slot4_sprite_image_source, name, name)
                 obs.obs_property_list_add_string(slot5_sprite_image_source, name, name)
                 obs.obs_property_list_add_string(slot6_sprite_image_source, name, name)
+                for src in item_sources:
+                    obs.obs_property_list_add_string(src, name, name)
 
     # Apparently we have to release the list of sources once we are done with
     # them
@@ -175,6 +202,8 @@ def script_defaults(settings):
     obs.obs_data_set_default_int(settings, "sprite_height", 50)
     obs.obs_data_set_default_int(settings, "sprite_width", 50)
 
+    obs.obs_data_set_default_int(settings, "item_height", 50)
+    obs.obs_data_set_default_int(settings, "item_width", 50)
 
 
 def script_update(settings):
@@ -197,6 +226,10 @@ def script_update(settings):
     global sprite_map
     global sprite_style
     global team_sprite_image_sources
+    global items_json_file
+    global item_image_sources
+    global item_height
+    global item_width
 
     # Set up the check interval
     check_interval = obs.obs_data_get_int(settings, "check_interval_int")
@@ -204,8 +237,13 @@ def script_update(settings):
     sprite_height = obs.obs_data_get_int(settings, "sprite_height")
     sprite_width = obs.obs_data_get_int(settings, "sprite_width")
 
+    item_height = obs.obs_data_get_int(settings, "item_height")
+    item_width = obs.obs_data_get_int(settings, "item_width")
+
     # Set up the json file location
     json_file = obs.obs_data_get_string(settings, "json_file")
+
+    items_json_file = obs.obs_data_get_string(settings, "items_json_file")
 
     # Set up the team sprites
     team_sprite_image_sources = [
@@ -217,10 +255,15 @@ def script_update(settings):
         obs.obs_data_get_string(settings, "slot6_sprite_image_source")
     ]
 
+    item_image_sources = [
+        obs.obs_data_get_string(settings, f"item{i}_image_source") for i in range(1, 7)
+    ]
+
     for source in team_sprite_image_sources:
         setup_source(source, sprite_height, sprite_width)
 
-    
+    for source in item_image_sources:
+        setup_source(source, item_height, item_width)
 
     # Set up the run bool
     run_boolean = obs.obs_data_get_bool(settings, "run_boolean")
@@ -228,12 +271,19 @@ def script_update(settings):
     # Remove the timer for the update_team function, if it exists
     obs.timer_remove(update_team)
 
+    # Remove the timer for the update_items function, if it exists
+    obs.timer_remove(update_items)
+
     # If the run boolean is false, return out
     if not run_boolean:
         return
 
     # If the json file isn't given, return out
     if not json_file:
+        return
+
+    # If the items json file isn't given, return out
+    if not items_json_file:
         return
 
     # If not all of the team slots are set, return out
@@ -247,9 +297,13 @@ def script_update(settings):
     ):
         return
 
+    # If not all of the item slots are set, return out
+    if not all(item_image_sources):
+        return
 
     # So now, if everything is set up then set the timer
     obs.timer_add(update_team, check_interval * 1000)
+    obs.timer_add(update_items, check_interval * 1000)
 
 
 def update_team():
@@ -284,6 +338,18 @@ def update_team():
     update_sprite_sources(team_sprite_image_sources[3], json_file_contents['slot4'])
     update_sprite_sources(team_sprite_image_sources[4], json_file_contents['slot5'])
     update_sprite_sources(team_sprite_image_sources[5], json_file_contents['slot6'])
+
+
+def update_items():
+    """Updates the different sources for the items"""
+    global items_json_file
+    global item_image_sources
+    # Load up the items JSON file in to a dictionary
+    with open(items_json_file, 'r') as file:
+        items_array = json.load(file)
+    # Update all of the item images
+    for i in range(6):
+        update_item_source(item_image_sources[i], items_array.get(f'slot{i+1}', {}))
 
 
 def update_sprite_sources(source_name, team_slot):
@@ -340,6 +406,23 @@ def update_sprite_sources(source_name, team_slot):
         obs.obs_source_release(source)
 
 
+def update_item_source(source_name, item_slot):
+    """Updates the image source for an item slot"""
+    # Get the item id
+    item_id = item_slot.get('id', 0)
+    # Format the filename as item_XXXX.png (zero-padded)
+    filename = f"item_icons/item_{item_id:04d}.png"
+    # Use the full path
+    location = os.path.join(os.path.dirname(__file__), filename)
+    source = obs.obs_get_source_by_name(source_name)
+    if source is not None:
+        settings = obs.obs_data_create()
+        obs.obs_data_set_string(settings, "file", location)
+        obs.obs_source_update(source, settings)
+        obs.obs_data_release(settings)
+        obs.obs_source_release(source)
+
+
 def get_sprite_location(urls, sprites, shiny, dex_number, variant):
     # If debug is enabled, print out this bit of text
     if debug:
@@ -376,7 +459,6 @@ def get_sprite_location(urls, sprites, shiny, dex_number, variant):
         return f"{script_path()}SV Sprites/" + filename
     else:
         return link + sprites[str(dex_number)][variant]
-
 
 
 def cache_image(link, shiny, location, image_type):
@@ -424,3 +506,7 @@ def setup_source(source_name, height, width):
     new_scale.x = height
     new_scale.y = width
     obs.obs_sceneitem_set_bounds(source, new_scale)
+
+
+def script_path():
+    return os.path.dirname(os.path.abspath(__file__)) + os.sep
