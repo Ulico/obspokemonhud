@@ -110,12 +110,6 @@ def script_defaults(settings):
     for i in range(1, 7):
         obs.obs_data_set_default_string(settings, f"item_name_{i}", "None")
         obs.obs_data_set_default_string(settings, f"item_id_{i}", "0")
-    obs.obs_data_set_default_int(settings, "item_id_1", 0)
-    obs.obs_data_set_default_int(settings, "item_id_2", 0)
-    obs.obs_data_set_default_int(settings, "item_id_3", 0)
-    obs.obs_data_set_default_int(settings, "item_id_4", 0)
-    obs.obs_data_set_default_int(settings, "item_id_5", 0)
-    obs.obs_data_set_default_int(settings, "item_id_6", 0)
     if debug:
         print("Function: Defaults (Items Editor)")
 
@@ -157,9 +151,6 @@ def save_button(properties, p):
     global json_file, items
     if not json_file:
         return
-    for i in range(1, 7):
-        name = obs.obs_data_get_string(my_settings, f"item_name_{i}")
-        items[f'slot{i}']['id'] = resolve_name_to_id(name)
     with open(json_file, 'w') as file:
         json.dump(items, file, indent=4)
     if debug:
