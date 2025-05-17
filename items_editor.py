@@ -29,7 +29,7 @@ items = {
 
 # Load item names from items.csv
 item_names = {}
-with open(os.path.join(os.path.dirname(__file__), 'items.csv'), newline='', encoding='utf-8') as csvfile:
+with open(os.path.join(os.path.dirname(__file__), 'data/items.csv'), newline='', encoding='utf-8') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         try:
