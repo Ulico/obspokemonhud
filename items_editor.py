@@ -40,7 +40,7 @@ with open(os.path.join(os.path.dirname(__file__), 'data/items.csv'), newline='',
 
 def script_description():
     """Sets up the description for the Items Editor."""
-    return "OBSPokemonHUD - Items Editor.\nBy Ulico."
+    return "OBSPokemonHUD - Items Editor.\nBy Ulico (Sorry Tom)."
 
 
 def script_properties():

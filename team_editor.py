@@ -67,7 +67,7 @@ def script_description():
     It outputs the value for the description part of the "Scripts" window for
     this script.
     """
-    return "OBSPokemonHUD - Team Editor.\nAlso by Tom."
+    return "OBSPokemonHUD - Team Editor.\nAlso by Tom (edited by Ulico)."
 
 
 def script_properties():
@@ -169,9 +169,6 @@ def script_properties():
         "Save",
         save_button
     )
-
-    # def myf():
-    #     print('test333')
               
     # Anytime a pokemon number changes, update the variant lists
     obs.obs_property_set_modified_callback(name1, name_modified)
@@ -180,6 +177,8 @@ def script_properties():
     obs.obs_property_set_modified_callback(name4, name_modified)
     obs.obs_property_set_modified_callback(name5, name_modified)
     obs.obs_property_set_modified_callback(name6, name_modified)
+    # obs.obs_property_set_modified_callback(sprite_style, sprite_style_modified)
+
     obs.obs_properties_apply_settings(properties, my_settings)
 
     if debug:
@@ -188,10 +187,15 @@ def script_properties():
     # Finally, return the properties so they show up
     return properties
 
+# def sprite_style_modified(props, property, settings):
+#     for i in range(1, 7):
+#         print(f"Updating slot {i} for sprite style change")
+#         update_slot(props, i, settings)
+#     return True
+
 def name_modified(props, property, settings):
     """Update the corresponding item_id_X field when item_name_X changes."""
     
-    # print(obs.obs_property_description(property))
     if settings is None:
         # Fallback to global my_settings
             global my_settings
@@ -207,12 +211,27 @@ def name_modified(props, property, settings):
     else:
         return True
         
+    update_slot(props, i, settings)
+    
+    return True
+
+def update_slot(props, i, settings):
     name = obs.obs_data_get_string(settings, f"team_member_name_{i}")
     dex = resolve_name_to_dex(name)
     obs.obs_data_set_string(settings, f"team_member_dex_{i}", str(dex) if dex else "Unknown")
-    team[f'slot{i}']['dexnumber'] = dex
-    update_single_variant(props, i, settings)
-    return True
+
+    current_map = obs.obs_data_get_string(settings, "sprite_style")
+    try:
+        with open(script_path() + "map_" + current_map + ".json", 'r') as file:
+            sprite_map = json.load(file)
+        variant_prop = obs.obs_properties_get(props, f"variant_{i}")
+        obs.obs_property_list_clear(variant_prop)
+        if dex > 0 and str(dex) in sprite_map['sprites']:
+            for sprite_variant in sprite_map['sprites'][str(dex)]:
+                obs.obs_property_list_add_string(variant_prop, sprite_variant, sprite_variant)
+    except Exception as e:
+        if debug:
+            print(f"Variant update error: {e}")
 
 def script_defaults(settings):
     """Sets the default values
@@ -344,24 +363,6 @@ with open(os.path.join(os.path.dirname(__file__), 'data/pokemon.csv'), newline='
 def resolve_name_to_dex(name):
     return pokemon_name_to_dex.get(name.strip().lower(), 0)
 
-def update_single_variant(props, idx, settings):
-    team[f'slot{idx}']['variant'] = obs.obs_data_get_string(settings, f"variant_{idx}")
-    #     
-    current_map = obs.obs_data_get_string(settings, "sprite_style")
-    try:
-        with open(script_path() + "map_" + current_map + ".json", 'r') as file:
-            sprite_map = json.load(file)
-        slot = f'slot{idx}'
-        dex = team[slot]['dexnumber']
-        variant_prop = obs.obs_properties_get(props, f"variant_{idx}")
-        obs.obs_property_list_clear(variant_prop)
-        if dex > 0 and str(dex) in sprite_map['sprites']:
-            for sprite_variant in sprite_map['sprites'][str(dex)]:
-                obs.obs_property_list_add_string(variant_prop, sprite_variant, sprite_variant)
-    except Exception as e:
-        if debug:
-            print(f"Variant update error: {e}")
-    return True
 
 def script_path():
     return os.path.dirname(os.path.abspath(__file__)) + os.sep
