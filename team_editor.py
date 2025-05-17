@@ -132,38 +132,32 @@ def script_properties():
     max_dex = 1010
 
     name1 = obs.obs_properties_add_text(properties, "team_member_name_1", "Member 1 (Name)", obs.OBS_TEXT_DEFAULT)
-    obs.obs_properties_add_button(properties, "submit_1", "Submit 1", lambda props, prop: submit_name_button_wrapper(props, 1, prop))
-    dex1 = obs.obs_properties_add_text(properties, "team_member_dex_1", "Member 1 (Dex No.)", obs.OBS_TEXT_INFO)
+    obs.obs_properties_add_text(properties, "team_member_dex_1", "Member 1 (Dex No.)", obs.OBS_TEXT_INFO)
     obs.obs_properties_add_list(properties, "variant_1", "Variant", obs.OBS_COMBO_TYPE_LIST, obs.OBS_COMBO_FORMAT_STRING)
     obs.obs_properties_add_bool(properties, "team_member_shiny_1", "Member 1 Shiny?")
 
     name2 = obs.obs_properties_add_text(properties, "team_member_name_2", "Member 2 (Name)", obs.OBS_TEXT_DEFAULT)
-    obs.obs_properties_add_button(properties, "submit_2", "Submit 2", lambda props, prop: submit_name_button_wrapper(props, 2, prop))
-    dex2 = obs.obs_properties_add_text(properties, "team_member_dex_2", "Member 2 (Dex No.)", obs.OBS_TEXT_INFO)
+    obs.obs_properties_add_text(properties, "team_member_dex_2", "Member 2 (Dex No.)", obs.OBS_TEXT_INFO)
     obs.obs_properties_add_list(properties, "variant_2", "Variant", obs.OBS_COMBO_TYPE_LIST, obs.OBS_COMBO_FORMAT_STRING)
     obs.obs_properties_add_bool(properties, "team_member_shiny_2", "Member 2 Shiny?")
 
     name3 = obs.obs_properties_add_text(properties, "team_member_name_3", "Member 3 (Name)", obs.OBS_TEXT_DEFAULT)
-    obs.obs_properties_add_button(properties, "submit_3", "Submit 3", lambda props, prop: submit_name_button_wrapper(props, 3, prop))
-    dex3 = obs.obs_properties_add_text(properties, "team_member_dex_3", "Member 3 (Dex No.)", obs.OBS_TEXT_INFO)
+    obs.obs_properties_add_text(properties, "team_member_dex_3", "Member 3 (Dex No.)", obs.OBS_TEXT_INFO)
     obs.obs_properties_add_list(properties, "variant_3", "Variant", obs.OBS_COMBO_TYPE_LIST, obs.OBS_COMBO_FORMAT_STRING)
     obs.obs_properties_add_bool(properties, "team_member_shiny_3", "Member 3 Shiny?")
 
     name4 = obs.obs_properties_add_text(properties, "team_member_name_4", "Member 4 (Name)", obs.OBS_TEXT_DEFAULT)
-    obs.obs_properties_add_button(properties, "submit_4", "Submit 4", lambda props, prop: submit_name_button_wrapper(props, 4, prop))
-    dex4 = obs.obs_properties_add_text(properties, "team_member_dex_4", "Member 4 (Dex No.)", obs.OBS_TEXT_INFO)
+    obs.obs_properties_add_text(properties, "team_member_dex_4", "Member 4 (Dex No.)", obs.OBS_TEXT_INFO)
     obs.obs_properties_add_list(properties, "variant_4", "Variant", obs.OBS_COMBO_TYPE_LIST, obs.OBS_COMBO_FORMAT_STRING)
     obs.obs_properties_add_bool(properties, "team_member_shiny_4", "Member 4 Shiny?")
 
     name5 = obs.obs_properties_add_text(properties, "team_member_name_5", "Member 5 (Name)", obs.OBS_TEXT_DEFAULT)
-    obs.obs_properties_add_button(properties, "submit_5", "Submit 5", lambda props, prop: submit_name_button_wrapper(props, 5, prop))
-    dex5 = obs.obs_properties_add_text(properties, "team_member_dex_5", "Member 5 (Dex No.)", obs.OBS_TEXT_INFO)
+    obs.obs_properties_add_text(properties, "team_member_dex_5", "Member 5 (Dex No.)", obs.OBS_TEXT_INFO)
     obs.obs_properties_add_list(properties, "variant_5", "Variant", obs.OBS_COMBO_TYPE_LIST, obs.OBS_COMBO_FORMAT_STRING)
     obs.obs_properties_add_bool(properties, "team_member_shiny_5", "Member 5 Shiny?")
 
     name6 = obs.obs_properties_add_text(properties, "team_member_name_6", "Member 6 (Name)", obs.OBS_TEXT_DEFAULT)
-    obs.obs_properties_add_button(properties, "submit_6", "Submit 6", lambda props, prop: submit_name_button_wrapper(props, 6, prop))
-    dex6 = obs.obs_properties_add_text(properties, "team_member_dex_6", "Member 6 (Dex No.)", obs.OBS_TEXT_INFO)
+    obs.obs_properties_add_text(properties, "team_member_dex_6", "Member 6 (Dex No.)", obs.OBS_TEXT_INFO)
     obs.obs_properties_add_list(properties, "variant_6", "Variant", obs.OBS_COMBO_TYPE_LIST, obs.OBS_COMBO_FORMAT_STRING)
     obs.obs_properties_add_bool(properties, "team_member_shiny_6", "Member 6 Shiny?")
 
@@ -175,16 +169,17 @@ def script_properties():
         "Save",
         save_button
     )
+
+    # def myf():
+    #     print('test333')
               
     # Anytime a pokemon number changes, update the variant lists
-    obs.obs_property_set_modified_callback(dex1, variantUpdate)
-    obs.obs_property_set_modified_callback(dex2, variantUpdate)
-    obs.obs_property_set_modified_callback(dex3, variantUpdate)
-    obs.obs_property_set_modified_callback(dex4, variantUpdate)
-    obs.obs_property_set_modified_callback(dex5, variantUpdate)
-    obs.obs_property_set_modified_callback(dex6, variantUpdate)
-    obs.obs_property_set_modified_callback(sprite_style, variantUpdate)
-
+    obs.obs_property_set_modified_callback(name1, name_modified)
+    obs.obs_property_set_modified_callback(name2, name_modified)
+    obs.obs_property_set_modified_callback(name3, name_modified)
+    obs.obs_property_set_modified_callback(name4, name_modified)
+    obs.obs_property_set_modified_callback(name5, name_modified)
+    obs.obs_property_set_modified_callback(name6, name_modified)
     obs.obs_properties_apply_settings(properties, my_settings)
 
     if debug:
@@ -193,6 +188,31 @@ def script_properties():
     # Finally, return the properties so they show up
     return properties
 
+def name_modified(props, property, settings):
+    """Update the corresponding item_id_X field when item_name_X changes."""
+    
+    # print(obs.obs_property_description(property))
+    if settings is None:
+        # Fallback to global my_settings
+            global my_settings
+            settings = my_settings
+
+    # Extract the index i from the property name, e.g., "team_member_name_3" -> 3
+    prop_name = obs.obs_property_name(property)
+    if prop_name.startswith("team_member_name_"):
+        try:
+            i = int(prop_name.split("_")[-1])
+        except ValueError:
+            return True
+    else:
+        return True
+        
+    name = obs.obs_data_get_string(settings, f"team_member_name_{i}")
+    dex = resolve_name_to_dex(name)
+    obs.obs_data_set_string(settings, f"team_member_dex_{i}", str(dex) if dex else "Unknown")
+    team[f'slot{i}']['dexnumber'] = dex
+    update_single_variant(props, i, settings)
+    return True
 
 def script_defaults(settings):
     """Sets the default values
@@ -275,36 +295,15 @@ def script_update(settings):
     for i in range(1, 7):
         name = obs.obs_data_get_string(settings, f"team_member_name_{i}")
         dex = resolve_name_to_dex(name)
-        obs.obs_data_set_string(settings, f"team_member_dex_{i}", str(dex) if dex else "Unknown")
-        # print(dex)
-        variantUpdate(settings, f"team_member_dex_{i}", settings)
+
         team[f'slot{i}']['dexnumber'] = dex
-        # team[f'slot{i}']['variant'] = obs.obs_data_get_string(settings, f"variant_{i}")
+        team[f'slot{i}']['variant'] = obs.obs_data_get_string(settings, f"variant_{i}")
         team[f'slot{i}']['shiny'] = obs.obs_data_get_bool(settings, f"team_member_shiny_{i}")
     team['map'] = obs.obs_data_get_string(settings, "sprite_style")
 
     # If debug is enabled, print out this bit of text
     if debug:
         print("Function: Script Update")
-
-
-def variantUpdate(props, property, settings):
-    # Clears the variant list and then adds variants to it
-    # print('here')
-    
-    current_map = obs.obs_data_get_string(settings, "sprite_style")
-    try:
-        with open(script_path() + "map_" + current_map + ".json", 'r') as file:
-            sprite_map = json.load(file)
-        for x in range(1,7):
-            
-            if team['slot'+str(x)]['dexnumber'] > 0:
-                obs.obs_property_list_clear(obs.obs_properties_get(props, "variant_" + str(x)))
-                for sprite_variant in sprite_map['sprites'][str(team['slot'+str(x)]['dexnumber'])]:
-                    obs.obs_property_list_add_string(obs.obs_properties_get(props, "variant_" + str(x)), sprite_variant, sprite_variant)
-        return True
-    except:
-        return True
 
 
 def save_button(properties, p):
@@ -330,7 +329,6 @@ def save_button(properties, p):
         print(f"JSON file: {json_file}")
         print(f"Team data: {json.dumps(team)}")
 
-
 # Load pokemon names and dex numbers from data/pokemon.csv
 pokemon_name_to_dex = {}
 with open(os.path.join(os.path.dirname(__file__), 'data/pokemon.csv'), newline='', encoding='utf-8') as csvfile:
@@ -347,6 +345,8 @@ def resolve_name_to_dex(name):
     return pokemon_name_to_dex.get(name.strip().lower(), 0)
 
 def update_single_variant(props, idx, settings):
+    team[f'slot{idx}']['variant'] = obs.obs_data_get_string(settings, f"variant_{idx}")
+    #     
     current_map = obs.obs_data_get_string(settings, "sprite_style")
     try:
         with open(script_path() + "map_" + current_map + ".json", 'r') as file:
@@ -365,22 +365,3 @@ def update_single_variant(props, idx, settings):
 
 def script_path():
     return os.path.dirname(os.path.abspath(__file__)) + os.sep
-
-def submit_name_button_wrapper(props, idx, prop):
-    # Use global my_settings instead of obs_frontend_get_script_settings
-    global my_settings
-    return submit_name_button(props, idx, my_settings)
-
-def submit_name_button(props, idx, settings=None):
-    """Callback for the submit button next to each Pokémon name field."""
-    if settings is None:
-        # Fallback to global my_settings
-        global my_settings
-        settings = my_settings
-    name = obs.obs_data_get_string(settings, f"team_member_name_{idx}")
-    dex = resolve_name_to_dex(name)
-    obs.obs_data_set_string(settings, f"team_member_dex_{idx}", str(dex) if dex else "Unknown")
-    team[f'slot{idx}']['dexnumber'] = dex
-    update_single_variant(props, idx, settings)
-    return True
-

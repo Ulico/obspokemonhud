@@ -95,13 +95,21 @@ def resolve_name_to_id(name):
 
 def item_name_modified(props, property, settings):
     """Update the corresponding item_id_X field when item_name_X changes."""
-    for i in range(1, 7):
-        if property == f"item_name_{i}":
-            name = obs.obs_data_get_string(settings, f"item_name_{i}")
-            item_id = resolve_name_to_id(name)
-            obs.obs_data_set_string(settings, f"item_id_{i}", str(item_id) if item_id else "Unknown")
-            items[f'slot{i}']['id'] = item_id
-            break
+    
+    prop_name = obs.obs_property_name(property)
+    if prop_name.startswith("item_member_name_"):
+        try:
+            i = int(prop_name.split("_")[-1])
+        except ValueError:
+            return True
+    else:
+        return True
+    
+    if property == f"item_name_{i}":
+        name = obs.obs_data_get_string(settings, f"item_name_{i}")
+        item_id = resolve_name_to_id(name)
+        obs.obs_data_set_string(settings, f"item_id_{i}", str(item_id) if item_id else "Unknown")
+        items[f'slot{i}']['id'] = item_id
     return True
 
 
