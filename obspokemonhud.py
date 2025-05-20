@@ -446,7 +446,7 @@ def get_sprite_location(urls, sprites, shiny, dex_number, variant):
         print("I don't belong")
         return
     
-    print(use_local)
+    # print(use_local)
     
     if use_local:
         filename = sprites[str(dex_number)][variant]
