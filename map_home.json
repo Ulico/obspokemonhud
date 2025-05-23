@@ -3157,5 +3157,399 @@
             "ice rider": "calyrex-ice-rider.png",
             "shadow rider": "calyrex-shadow-rider.png"
         }
+        ,
+        "899": {
+            "standard": "wyrdeer.png"
+        },
+        "900": {
+            "standard": "kleavor.png"
+        },
+        "901": {
+            "standard": "ursaluna.png"
+        },
+        "902": {
+            "standard": "basculegion.png",
+            "female": "basculegion-f.png"
+        },
+        "903": {
+            "standard": "sneasler.png"
+        },
+        "904": {
+            "standard": "overqwil.png"
+        },
+        "905": {
+            "incarnate": "enamorus-incarnate.png",
+            "therian": "enamorus-therian.png"
+        },
+        "906": {
+            "standard": "sprigatito.png"
+        },
+        "907": {
+            "standard": "floragato.png"
+        },
+        "908": {
+            "standard": "meowscarada.png"
+        },
+        "909": {
+            "standard": "fuecoco.png"
+        },
+        "910": {
+            "standard": "crocalor.png"
+        },
+        "911": {
+            "standard": "skeledirge.png"
+        },
+        "912": {
+            "standard": "quaxly.png"
+        },
+        "913": {
+            "standard": "quaxwell.png"
+        },
+        "914": {
+            "standard": "quaquaval.png"
+        },
+        "915": {
+            "standard": "lechonk.png"
+        },
+        "916": {
+            "standard": "oinkologne.png",
+            "female": "oinkologne-f.png"
+        },
+        "917": {
+            "standard": "tarountula.png"
+        },
+        "918": {
+            "standard": "spidops.png"
+        },
+        "919": {
+            "standard": "nymble.png"
+        },
+        "920": {
+            "standard": "lokix.png"
+        },
+        "921": {
+            "standard": "pawmi.png"
+        },
+        "922": {
+            "standard": "pawmo.png"
+        },
+        "923": {
+            "standard": "pawmot.png"
+        },
+        "924": {
+            "standard": "tandemaus.png"
+        },
+        "925": {
+            "standard": "maushold.png",
+            "family of three": "maushold-family-of-three.png"
+        },
+        "926": {
+            "standard": "fidough.png"
+        },
+        "927": {
+            "standard": "dachsbun.png"
+        },
+        "928": {
+            "standard": "smoliv.png"
+        },
+        "929": {
+            "standard": "dolliv.png"
+        },
+        "930": {
+            "standard": "arboliva.png"
+        },
+        "931": {
+            "standard": "squawkabilly.png",
+            "blue plumage": "squawkabilly-blue.png",
+            "yellow plumage": "squawkabilly-yellow.png",
+            "white plumage": "squawkabilly-white.png"
+        },
+        "932": {
+            "standard": "nacli.png"
+        },
+        "933": {
+            "standard": "naclstack.png"
+        },
+        "934": {
+            "standard": "garganacl.png"
+        },
+        "935": {
+            "standard": "charcadet.png"
+        },
+        "936": {
+            "standard": "armarouge.png"
+        },
+        "937": {
+            "standard": "ceruledge.png"
+        },
+        "938": {
+            "standard": "tadbulb.png"
+        },
+        "939": {
+            "standard": "bellibolt.png"
+        },
+        "940": {
+            "standard": "wattrel.png"
+        },
+        "941": {
+            "standard": "kilowattrel.png"
+        },
+        "942": {
+            "standard": "maschiff.png"
+        },
+        "943": {
+            "standard": "mabosstiff.png"
+        },
+        "944": {
+            "standard": "shroodle.png"
+        },
+        "945": {
+            "standard": "grafaiai.png"
+        },
+        "946": {
+            "standard": "bramblin.png"
+        },
+        "947": {
+            "standard": "brambleghast.png"
+        },
+        "948": {
+            "standard": "toedscool.png"
+        },
+        "949": {
+            "standard": "toedscruel.png"
+        },
+        "950": {
+            "standard": "klawf.png"
+        },
+        "951": {
+            "standard": "capsakid.png"
+        },
+        "952": {
+            "standard": "scovillain.png"
+        },
+        "953": {
+            "standard": "rellor.png"
+        },
+        "954": {
+            "standard": "rabsca.png"
+        },
+        "955": {
+            "standard": "flittle.png"
+        },
+        "956": {
+            "standard": "espathra.png"
+        },
+        "957": {
+            "standard": "tinkatink.png"
+        },
+        "958": {
+            "standard": "tinkatuff.png"
+        },
+        "959": {
+            "standard": "tinkaton.png"
+        },
+        "960": {
+            "standard": "wiglett.png"
+        },
+        "961": {
+            "standard": "wugtrio.png"
+        },
+        "962": {
+            "standard": "bombirdier.png"
+        },
+        "963": {
+            "standard": "finizen.png"
+        },
+        "964": {
+            "standard": "palafin.png",
+            "hero": "palafin-hero.png"
+        },
+        "965": {
+            "standard": "varoom.png"
+        },
+        "966": {
+            "standard": "revavroom.png"
+        },
+        "967": {
+            "standard": "cyclizar.png"
+        },
+        "968": {
+            "standard": "orthworm.png"
+        },
+        "969": {
+            "standard": "glimmet.png"
+        },
+        "970": {
+            "standard": "glimmora.png"
+        },
+        "971": {
+            "standard": "greavard.png"
+        },
+        "972": {
+            "standard": "houndstone.png"
+        },
+        "973": {
+            "standard": "flamigo.png"
+        },
+        "974": {
+            "standard": "cetoddle.png"
+        },
+        "975": {
+            "standard": "cetitan.png"
+        },
+        "976": {
+            "standard": "veluza.png"
+        },
+        "977": {
+            "standard": "dondozo.png"
+        },
+        "978": {
+            "standard": "tatsugiri.png",
+            "droopy": "tatsugiri-droopy.png",
+            "stretchy": "tatsugiri-stretchy.png"
+        },
+        "979": {
+            "standard": "annihilape.png"
+        },
+        "980": {
+            "standard": "clodsire.png"
+        },
+        "981": {
+            "standard": "farigiraf.png"
+        },
+        "982": {
+            "standard": "dudunsparce.png",
+            "three segment": "dudunsparce-three-segment.png"
+        },
+        "983": {
+            "standard": "kingambit.png"
+        },
+        "984": {
+            "standard": "great-tusk.png"
+        },
+        "985": {
+            "standard": "scream-tail.png"
+        },
+        "986": {
+            "standard": "brute-bonnet.png"
+        },
+        "987": {
+            "standard": "flutter-mane.png"
+        },
+        "988": {
+            "standard": "slither-wing.png"
+        },
+        "989": {
+            "standard": "sandy-shocks.png"
+        },
+        "990": {
+            "standard": "iron-treads.png"
+        },
+        "991": {
+            "standard": "iron-bundle.png"
+        },
+        "992": {
+            "standard": "iron-hands.png"
+        },
+        "993": {
+            "standard": "iron-jugulis.png"
+        },
+        "994": {
+            "standard": "iron-moth.png"
+        },
+        "995": {
+            "standard": "iron-thorns.png"
+        },
+        "996": {
+            "standard": "frigibax.png"
+        },
+        "997": {
+            "standard": "arctibax.png"
+        },
+        "998": {
+            "standard": "baxcalibur.png"
+        },
+        "999": {
+            "chest": "gimmighoul-chest.png",
+            "roaming": "gimmighoul-roaming.png"
+        },
+        "1000": {
+            "standard": "gholdengo.png"
+        },
+        "1001": {
+            "standard": "wo chien.png"
+        },
+        "1002": {
+            "standard": "chien pao.png"
+        },
+        "1003": {
+            "standard": "ting lu.png"
+        },
+        "1004": {
+            "standard": "chi yu.png"
+        },
+        "1005": {
+            "standard": "roaring-moon.png"
+        },
+        "1006": {
+            "standard": "iron-valiant.png"
+        },
+        "1007": {
+            "standard": "koraidon.png"
+        },
+        "1008": {
+            "standard": "miraidon.png"
+        },
+        "1009": {
+            "standard": "walking-wake.png"
+        },
+        "1010": {
+            "standard": "iron-leaves.png"
+        },
+        "1011": {
+            "standard": "dipplin.png"
+        },
+        "1012": {
+            "standard": "poltchageist.png"
+        },
+        "1013": {
+            "standard": "sinistcha.png"
+        },
+        "1014": {
+            "standard": "okidogi.png"
+        },
+        "1015": {
+            "standard": "munkidori.png"
+        },
+        "1016": {
+            "standard": "fezandipiti.png"
+        },
+        "1017": {
+            "standard": "ogerpon.png",
+            "wellspring mask": "ogerpon-wellspring-mask.png",
+            "hearthflame mask": "ogerpon-hearthflame-mask.png",
+            "cornerstone mask": "ogerpon-cornerstone-mask.png"
+        },
+        "1018": {
+            "standard": "archaludon.png"
+        },
+        "1019": {
+            "standard": "hydrapple.png"
+        },
+        "1020": {
+            "standard": "gouging-fire.png"
+        },
+        "1021": {
+            "standard": "raging-bolt.png"
+        },
+        "1022": {
+            "standard": "iron-boulder.png"
+        },
+        "1023": {
+            "standard": "iron-crown.png"
+        },
+        "1024": {
+            "standard": "terapagos.png"
+        }
     }
 }
