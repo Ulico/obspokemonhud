@@ -424,5 +424,6 @@ def parse_paste_button(props, prop):
                 obs.obs_data_set_string(settings, f"variant_{i+1}", first_variant)
 
         team[f'slot{i+1}']['variant'] = obs.obs_data_get_string(settings, f"variant_{i+1}")
+        team[f'slot{i+1}']['dexnumber'] = int(dex.split('_')[0])
 
     return True
