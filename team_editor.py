@@ -392,9 +392,35 @@ def parse_paste_button(props, prop):
         # Optionally, update dex as well
         dex = resolve_name_to_dex(name)
         if '_' in dex:
-            name = name.split('-')[0]
-        obs.obs_data_set_string(settings, f"team_member_name_{i+1}", name)
+            obs.obs_data_set_string(settings, f"team_member_name_{i+1}", name.split('-')[0])
+        else:
+            obs.obs_data_set_string(settings, f"team_member_name_{i+1}", name)
         obs.obs_data_set_bool(settings, f"team_member_shiny_{i+1}", shiny)
         team[f'slot{i+1}']['shiny'] = shiny
         update_slot(props, i+1, settings)
+        # Set variant if possible
+        variant_prop = obs.obs_properties_get(props, f"variant_{i+1}")
+        variant_set = False
+        if '-' in name:
+            variant_candidate = name.split('-', 1)[1].strip().lower()
+            # Check if this variant is in the dropdown options
+            if variant_prop is not None:
+                for idx in range(obs.obs_property_list_item_count(variant_prop)):
+                    if obs.obs_property_list_item_string(variant_prop, idx).lower() == variant_candidate:
+                        obs.obs_data_set_string(settings, f"variant_{i+1}", variant_candidate)
+                        variant_set = True
+                        break
+        if not variant_set and variant_prop is not None and obs.obs_property_list_item_count(variant_prop) > 0:
+            # Try to set to "Standard" if available, otherwise use the first option
+            standard_idx = -1
+            for idx in range(obs.obs_property_list_item_count(variant_prop)):
+                if obs.obs_property_list_item_string(variant_prop, idx).lower() == "standard":
+                    standard_idx = idx
+                    break
+            if standard_idx != -1:
+                obs.obs_data_set_string(settings, f"variant_{i+1}", "standard")
+            else:
+                first_variant = obs.obs_property_list_item_string(variant_prop, 0)
+                obs.obs_data_set_string(settings, f"variant_{i+1}", first_variant)
+
     return True
