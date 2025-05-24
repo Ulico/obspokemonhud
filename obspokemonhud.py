@@ -13,7 +13,7 @@ check_interval = 5
 
 # Enabled for some extra debug output to the script log
 # True or False (they need to be capitals for Python)
-debug = False
+debug = True
 
 # The location for the JSON file
 json_file = ""
@@ -289,19 +289,19 @@ def script_update(settings):
         return
 
     # If not all of the team slots are set, return out
-    if not (
-        team_sprite_image_sources[0] and
-        team_sprite_image_sources[1] and
-        team_sprite_image_sources[2] and
-        team_sprite_image_sources[3] and
-        team_sprite_image_sources[4] and
-        team_sprite_image_sources[5]
-    ):
-        return
+    # if not (
+    #     team_sprite_image_sources[0] and
+    #     team_sprite_image_sources[1] and
+    #     team_sprite_image_sources[2] and
+    #     team_sprite_image_sources[3] and
+    #     team_sprite_image_sources[4] and
+    #     team_sprite_image_sources[5]
+    # ):
+    #     return
 
-    # If not all of the item slots are set, return out
-    if not all(item_image_sources):
-        return
+    # # If not all of the item slots are set, return out
+    # if not all(item_image_sources):
+    #     return
 
     # So now, if everything is set up then set the timer
     obs.timer_add(update_team, check_interval * 1000)

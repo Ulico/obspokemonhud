@@ -3550,6 +3550,9 @@
         },
         "1024": {
             "standard": "terapagos.png"
+        },
+        "1025": {
+            "standard": "pecharunt.png"
         }
     }
 }

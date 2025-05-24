@@ -129,7 +129,6 @@ def script_properties():
     )"""
 
     # ------------------------------------------------------
-    max_dex = 1010
 
     name1 = obs.obs_properties_add_text(properties, "team_member_name_1", "Member 1 (Name)", obs.OBS_TEXT_DEFAULT)
     obs.obs_properties_add_text(properties, "team_member_dex_1", "Member 1 (Dex No.)", obs.OBS_TEXT_INFO)
