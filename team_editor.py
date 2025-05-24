@@ -423,4 +423,6 @@ def parse_paste_button(props, prop):
                 first_variant = obs.obs_property_list_item_string(variant_prop, 0)
                 obs.obs_data_set_string(settings, f"variant_{i+1}", first_variant)
 
+        team[f'slot{i}']['variant'] = obs.obs_data_get_string(settings, f"variant_{i}")
+
     return True
