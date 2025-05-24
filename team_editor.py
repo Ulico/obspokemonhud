@@ -10,8 +10,6 @@ import obspython as obs
 import os.path
 import csv
 
-
-
 # Enabled for some extra debug output to the script log
 # True or False (they need to be capitals for Python)
 debug = False
@@ -20,8 +18,6 @@ debug = False
 json_file = ""
 
 my_settings = NULL
-
-
 
 # Team information
 team = {
@@ -90,7 +86,10 @@ def script_properties():
     # Declare the properties object for us to mess with
     properties = obs.obs_properties_create()
 
-    
+    # Add a multi-line text box for team paste and a parse button at the top
+    teampaste_box = obs.obs_properties_add_text(properties, "teampaste_box", "Paste Team", obs.OBS_TEXT_MULTILINE)
+    obs.obs_properties_add_button(properties, "parse_paste_button", "Parse Paste", parse_paste_button)
+
     # Add in a file path property for the team.json file
     obs.obs_properties_add_path(properties, "json_file", "Team JSON File", obs.OBS_PATH_FILE, "*.json", None)
 
@@ -176,7 +175,6 @@ def script_properties():
     obs.obs_property_set_modified_callback(name4, name_modified)
     obs.obs_property_set_modified_callback(name5, name_modified)
     obs.obs_property_set_modified_callback(name6, name_modified)
-    # obs.obs_property_set_modified_callback(sprite_style, sprite_style_modified)
 
     obs.obs_properties_apply_settings(properties, my_settings)
 
@@ -186,11 +184,6 @@ def script_properties():
     # Finally, return the properties so they show up
     return properties
 
-# def sprite_style_modified(props, property, settings):
-#     for i in range(1, 7):
-#         print(f"Updating slot {i} for sprite style change")
-#         update_slot(props, i, settings)
-#     return True
 
 def name_modified(props, property, settings):
     """Update the corresponding item_id_X field when item_name_X changes."""
@@ -216,7 +209,7 @@ def name_modified(props, property, settings):
 
 def update_slot(props, i, settings):
     name = obs.obs_data_get_string(settings, f"team_member_name_{i}")
-    dex = resolve_name_to_dex(name)
+    dex = int(resolve_name_to_dex(name).split('_')[0])
     obs.obs_data_set_string(settings, f"team_member_dex_{i}", str(dex) if dex else "Unknown")
 
     current_map = obs.obs_data_get_string(settings, "sprite_style")
@@ -309,10 +302,9 @@ def script_update(settings):
         obs.obs_data_set_bool(settings, "team_member_shiny_5", new_team_data['slot5']['shiny'])
         obs.obs_data_set_bool(settings, "team_member_shiny_6", new_team_data['slot6']['shiny'])
 
-    # print('here4')
     for i in range(1, 7):
         name = obs.obs_data_get_string(settings, f"team_member_name_{i}")
-        dex = resolve_name_to_dex(name)
+        dex = int(resolve_name_to_dex(name).split('_')[0])
 
         team[f'slot{i}']['dexnumber'] = dex
         team[f'slot{i}']['variant'] = obs.obs_data_get_string(settings, f"variant_{i}")
@@ -353,15 +345,56 @@ with open(os.path.join(os.path.dirname(__file__), 'data/pokemon.csv'), newline='
     reader = csv.DictReader(csvfile)
     for row in reader:
         try:
-            dex = int(row['Number'])
+            dex = row['Number'].strip().lower()
             name = row['Name'].strip().lower()
             pokemon_name_to_dex[name] = dex
         except Exception:
             continue
 
 def resolve_name_to_dex(name):
-    return pokemon_name_to_dex.get(name.strip().lower(), 0)
+    return pokemon_name_to_dex.get(name.strip().lower(), '0')
 
 
 def script_path():
     return os.path.dirname(os.path.abspath(__file__)) + os.sep
+
+def parse_paste_button(props, prop):
+    """Parse the teampaste and fill the 6 name slots, updating shiny as well."""
+    global my_settings
+    settings = my_settings
+    paste = obs.obs_data_get_string(settings, "teampaste_box")
+    # Split into blocks by double newlines
+    blocks = [b.strip() for b in paste.split("\n\n") if b.strip()]
+
+    for i, block in enumerate(blocks[:6]):
+        lines = block.splitlines()
+        # The first line is like 'Tornadus @ Covert Cloak'
+        name_item_line = lines[0] if lines else ""
+        if ' @ ' in name_item_line:
+            name, _ = name_item_line.split(' @ ')
+            name = name.strip()
+        else:
+            name = name_item_line.strip()
+        # Check for nickname/gender
+        if '(' in name and ')' in name:
+            parts = name.split('(')
+            parts = [part.strip().strip(')') for part in parts]
+            if parts[-1] in ['M', 'F']:
+                name = parts[-2]
+            else:
+                name = parts[-1]
+        # Shiny detection
+        shiny = False
+        for line in lines:
+            if line.strip().lower().startswith('shiny'):
+                shiny = True
+                break
+        # Optionally, update dex as well
+        dex = resolve_name_to_dex(name)
+        if '_' in dex:
+            name = name.split('-')[0]
+        obs.obs_data_set_string(settings, f"team_member_name_{i+1}", name)
+        obs.obs_data_set_bool(settings, f"team_member_shiny_{i+1}", shiny)
+        team[f'slot{i+1}']['shiny'] = shiny
+        update_slot(props, i+1, settings)
+    return True

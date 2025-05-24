@@ -50,8 +50,14 @@ def script_properties():
 
     properties = obs.obs_properties_create()
 
+            # Add a multi-line text box for team paste and a parse button at the top
+    teampaste_box = obs.obs_properties_add_text(properties, "teampaste_box", "Paste Team", obs.OBS_TEXT_MULTILINE)
+    obs.obs_properties_add_button(properties, "parse_paste_button", "Parse Paste", parse_paste_button)
+
     # Add in a file path property for the items.json file
     obs.obs_properties_add_path(properties, "json_file", "Items JSON File", obs.OBS_PATH_FILE, "*.json", None)
+
+
 
     name1 = obs.obs_properties_add_text(properties, "item_name_1", "Item 1 (Name)", obs.OBS_TEXT_DEFAULT)
     obs.obs_properties_add_text(properties, "item_id_1", "Item 1 (ID)", obs.OBS_TEXT_INFO)
@@ -65,6 +71,7 @@ def script_properties():
     obs.obs_properties_add_text(properties, "item_id_5", "Item 5 (ID)", obs.OBS_TEXT_INFO)
     name6 = obs.obs_properties_add_text(properties, "item_name_6", "Item 6 (Name)", obs.OBS_TEXT_DEFAULT)
     obs.obs_properties_add_text(properties, "item_id_6", "Item 6 (ID)", obs.OBS_TEXT_INFO)
+
 
     # Add callbacks to update id fields when name changes
     obs.obs_property_set_modified_callback(name1, item_name_modified)
@@ -96,21 +103,44 @@ def resolve_name_to_id(name):
 def item_name_modified(props, property, settings):
     """Update the corresponding item_id_X field when item_name_X changes."""
     
+    # prop_name = obs.obs_property_name(property)
+    # if prop_name.startswith("item_member_name_"):
+    #     try:
+    #         i = int(prop_name.split("_")[-1])
+    #     except ValueError:
+    #         return True
+    # else:
+    #     return True
+    
+    # if property == f"item_name_{i}":
+        
+    # return True
+
+    if settings is None:
+        # Fallback to global my_settings
+            global my_settings
+            settings = my_settings
+
+    # Extract the index i from the property name, e.g., "team_member_name_3" -> 3
     prop_name = obs.obs_property_name(property)
-    if prop_name.startswith("item_member_name_"):
+    if prop_name.startswith("item_name_"):
         try:
             i = int(prop_name.split("_")[-1])
         except ValueError:
             return True
     else:
         return True
+        
+    update_slot(props, i, settings)
     
-    if property == f"item_name_{i}":
-        name = obs.obs_data_get_string(settings, f"item_name_{i}")
-        item_id = resolve_name_to_id(name)
-        obs.obs_data_set_string(settings, f"item_id_{i}", str(item_id) if item_id else "Unknown")
-        items[f'slot{i}']['id'] = item_id
     return True
+
+
+def update_slot(props, i, settings):
+    name = obs.obs_data_get_string(settings, f"item_name_{i}")
+    item_id = resolve_name_to_id(name)
+    obs.obs_data_set_string(settings, f"item_id_{i}", str(item_id) if item_id else "Unknown")
+    items[f'slot{i}']['id'] = item_id
 
 
 def script_defaults(settings):
@@ -165,3 +195,26 @@ def save_button(properties, p):
         print("Function: save_items")
         print(f"JSON file: {json_file}")
         print(f"Items data: {json.dumps(items)}")
+
+
+def parse_paste_button(props, prop):
+    """Parse the teampaste and fill the 6 item name slots from after the @ in each block."""
+    global my_settings
+    settings = my_settings
+    paste = obs.obs_data_get_string(settings, "teampaste_box")
+    # Split into blocks by double newlines
+    blocks = [b.strip() for b in paste.split("\n\n") if b.strip()]
+    for i, block in enumerate(blocks[:6]):
+        # The first line is like 'Tornadus @ Covert Cloak'
+        name_item_line = block.splitlines()[0] if block.splitlines() else ""
+        item = None
+        if ' @ ' in name_item_line:
+            _, item = name_item_line.split(' @ ')
+            item = item.strip()
+
+        obs.obs_data_set_string(settings, f"item_name_{i+1}", item)
+        # Optionally, update id as well
+        update_slot(props, i+1, settings)
+        # item_id = resolve_name_to_id(item)
+        # obs.obs_data_set_string(settings, f"item_id_{i+1}", str(item_id) if item_id else "Unknown")
+    return True
