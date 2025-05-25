@@ -50,14 +50,11 @@ def script_properties():
 
     properties = obs.obs_properties_create()
 
-            # Add a multi-line text box for team paste and a parse button at the top
     teampaste_box = obs.obs_properties_add_text(properties, "teampaste_box", "Paste Team", obs.OBS_TEXT_MULTILINE)
     obs.obs_properties_add_button(properties, "parse_paste_button", "Parse Paste", parse_paste_button)
 
     # Add in a file path property for the items.json file
     obs.obs_properties_add_path(properties, "json_file", "Items JSON File", obs.OBS_PATH_FILE, "*.json", None)
-
-
 
     name1 = obs.obs_properties_add_text(properties, "item_name_1", "Item 1 (Name)", obs.OBS_TEXT_DEFAULT)
     obs.obs_properties_add_text(properties, "item_id_1", "Item 1 (ID)", obs.OBS_TEXT_INFO)
@@ -102,19 +99,6 @@ def resolve_name_to_id(name):
 
 def item_name_modified(props, property, settings):
     """Update the corresponding item_id_X field when item_name_X changes."""
-    
-    # prop_name = obs.obs_property_name(property)
-    # if prop_name.startswith("item_member_name_"):
-    #     try:
-    #         i = int(prop_name.split("_")[-1])
-    #     except ValueError:
-    #         return True
-    # else:
-    #     return True
-    
-    # if property == f"item_name_{i}":
-        
-    # return True
 
     if settings is None:
         # Fallback to global my_settings

@@ -108,25 +108,6 @@ def script_properties():
             map = x.replace('map_','').replace('.json','')
             obs.obs_property_list_add_string(sprite_style, map, map)
 
-    # Dropdown for entering a number or choosing pokemon name. Maybe another time.
-    """display_type = obs.obs_properties_add_list(
-        properties,  # The properties variable
-        "display_type",  # Setting identifier string
-        "Display Type",  # Localized name shown to user
-        obs.OBS_COMBO_TYPE_LIST,  # Whether it's editable or not
-        obs.OBS_COMBO_FORMAT_STRING,  # The type of format to display
-    )
-    obs.obs_property_list_add_string(
-        display_type,
-        "Dex",
-        "dex"
-    )
-    obs.obs_property_list_add_string(
-        display_type,
-        "Name",
-        "name"
-    )"""
-
     # ------------------------------------------------------
 
     name1 = obs.obs_properties_add_text(properties, "team_member_name_1", "Member 1 (Name)", obs.OBS_TEXT_DEFAULT)
@@ -175,6 +156,16 @@ def script_properties():
     obs.obs_property_set_modified_callback(name4, name_modified)
     obs.obs_property_set_modified_callback(name5, name_modified)
     obs.obs_property_set_modified_callback(name6, name_modified)
+
+    # When sprite_style changes, clear all team member fields
+    def sprite_style_modified(props, property, settings):
+        for i in range(1, 7):
+            obs.obs_data_set_string(settings, f"team_member_name_{i}", "")
+            obs.obs_data_set_string(settings, f"team_member_dex_{i}", "0")
+            obs.obs_data_set_string(settings, f"variant_{i}", "")
+        return True
+
+    obs.obs_property_set_modified_callback(sprite_style, sprite_style_modified)
 
     obs.obs_properties_apply_settings(properties, my_settings)
 

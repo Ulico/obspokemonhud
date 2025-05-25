@@ -379,6 +379,7 @@ def update_sprite_sources(source_name, team_slot):
         location = f"{script_path()}empty.gif"
     else:
         sprite = get_sprite_location(
+            array['map'],
             sprite_map['urls'],
             sprite_map['sprites'],
             team_slot['shiny'],
@@ -425,7 +426,7 @@ def update_item_source(source_name, item_slot):
         obs.obs_source_release(source)
 
 
-def get_sprite_location(urls, sprites, shiny, dex_number, variant):
+def get_sprite_location(map_name, urls, sprites, shiny, dex_number, variant):
     # If debug is enabled, print out this bit of text
     if debug:
         print("Function: Get Sprite sources")
@@ -434,7 +435,7 @@ def get_sprite_location(urls, sprites, shiny, dex_number, variant):
 
     use_local = False
 
-    if 'paldea' in variant or dex_number > 905:
+    if map_name == 'showdown' and ('paldea' in variant or dex_number > 905):
         use_local = True
     else:
         if shiny:
